@@ -1,3 +1,4 @@
 galakhovI -- 2019-10-18 8:40
     Added structure to the project
     Began work on devlog
+    Began work on database
