@@ -3,6 +3,21 @@
 {% block content %}
     <h3>Sign up for the story editor</h3>
 
+    <form method="post">
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text"><br><br>
+
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password"><br><br>
+
+        <label for="password_repeat">Repeat Password</label>
+        <input id="password_repeat" name="password_repeat" type="password"><br><br>
+
+        <input type="submit" value="Sign Up!">
+    </form>
+
+    <br>
+
     <a href="{{ url_for('index') }}">back to main</a>
 
 {% endblock content %}
