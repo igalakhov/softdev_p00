@@ -1,7 +1,11 @@
 {% extends "_base.html" %}
 
+{% from "_macros.html" import do_flashes %}
+
 {% block content %}
     <h3>Sign up for the story editor</h3>
+
+    {{ do_flashes() }}
 
     <form method="post">
         <label for="username">Username:</label>

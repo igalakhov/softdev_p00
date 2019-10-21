@@ -1,6 +1,10 @@
-from flask import Flask, render_template, request
+import os
+
+from flask import Flask, render_template, request, flash
 
 app = Flask(__name__)
+
+app.secret_key = os.urandom(64)
 
 
 @app.route('/')
@@ -26,6 +30,28 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         password_repeat = request.form['password_repeat']
+
+        # make sure that the form data is valid
+        valid = True
+
+        inrange = lambda a, b, c: b <= a <= c
+
+        if not inrange(len(username), 3, 12):
+            flash('Username should be between 3 and 12 characters!', 'red')
+            valid = False
+
+        if not inrange(len(password), 3, 12) or not inrange(len(password_repeat), 3, 12):
+            flash('Password should be between 3 and 12 characters!', 'red')
+            valid = False
+
+        if not password == password_repeat:
+            flash('Passwords do not match!', 'red')
+            valid = False
+
+        # TODO: check if username is taken
+
+        if not valid:
+            flash('Please fix the above errors before submitting the form again!', 'red')
 
         print(username, password, password_repeat)
 

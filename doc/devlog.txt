@@ -8,3 +8,5 @@ galakhovI -- 2019-10-21 8:30
     Added routes for login and signup
     Added html pages for login and signup
     Began work on database classes
+galakhovI -- 2019-10-21 11:20
+    More work on Sign Up form
