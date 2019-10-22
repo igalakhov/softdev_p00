@@ -9,7 +9,6 @@ def execute_command(cmd):
     c = db.cursor()
     return c.execute(cmd)
 
-
 # build the schema
 # WARNING this will delete all the data in the database
 def build_schema():
