@@ -2,5 +2,8 @@
 
 {% block content %}
     stories here uwu<br>
+    {% for story in threads %}
+        {{ story.title }} by {{ story.author }}<br>
+    {%  endfor %}
     <a href="/stories/create/new">new story</a>
 {% endblock content %}

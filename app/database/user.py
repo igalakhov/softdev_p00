@@ -1,6 +1,6 @@
 # user class for interacting with the database
 # using a class for database interaction instead of raw SQL makes code a lot more readable and simpler
-from bcrypt import hashpw, gensalt, checkpw
+# from bcrypt import hashpw, gensalt, checkpw
 
 from app.database import execute_command
 

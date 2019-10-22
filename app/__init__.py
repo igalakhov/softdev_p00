@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, flash, redirect
 
 from app.database.user import User
+from app.database.story import Story
 
 app = Flask(__name__)
 
@@ -104,7 +105,8 @@ def signup():
 
 @app.route('/stories')
 def stories():
-    return render_template('stories.html', title='Stories')
+    storyThreads=[Story(1), Story(2), Story(3)]
+    return render_template('stories.html', title='Stories', threads=storyThreads)
 
 
 @app.route('/stories/create/new')
