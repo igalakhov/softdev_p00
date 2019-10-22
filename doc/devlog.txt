@@ -26,3 +26,5 @@ linM -- 2019-10-21 23:00
 galakhovI -- 2019-10-22 8:25
     Finished code for creating database schema
     Still working on login
+galakhovI -- 2019-10-22 8:40
+    Finished login
