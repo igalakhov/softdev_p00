@@ -112,7 +112,7 @@ def stories():
 @app.route("/stories/<id>")
 def show_story(id):
     story = Story(id)
-    return "display " + story.title + " by " + story.author + "\n" + story.content
+    return render_template('storythread.html', title=story.title, thread=story)
 
 
 
