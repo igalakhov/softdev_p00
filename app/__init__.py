@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
+
 from app.database.user import User
 
 app = Flask(__name__)
@@ -14,8 +15,44 @@ def index():
     return render_template('index.html', title='welcome')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    # check if form was submitted
+    if 'username' in request.form.keys() and \
+            'password' in request.form.keys():
+        # read the data from the form
+        # we can use [] now since we know the key exists
+        username = request.form['username']
+        password = request.form['password']
+
+        # make sure that the form data is valid
+        valid = True
+
+        inrange = lambda a, b, c: b <= a <= c
+
+        if not inrange(len(username), 3, 12):
+            flash('Username should be between 3 and 12 characters!', 'red')
+            valid = False
+
+        if not inrange(len(password), 3, 12):
+            flash('Password should be between 3 and 12 characters!', 'red')
+            valid = False
+
+        to_login = User.get_by_username(username)
+
+        auth_valid = True
+
+        if to_login is None:
+            auth_valid = False
+        elif not to_login.validate_password(password):
+            auth_valid = False
+
+        if not valid or not auth_valid:
+            flash('Please fix the above errors before submitting the form again!', 'red')
+        else:
+            # log in user
+            flash('Logged In as [%s]' % to_login.username, 'green')
+
     return render_template('login.html', title='login')
 
 
@@ -57,16 +94,19 @@ def signup():
             flash('Please fix the above errors before submitting the form again!', 'red')
         else:
             User.new_user(username, password)
-            flash('Account created!', 'green')
+            flash('Account created! Log In below!', 'green')
+            return redirect('login')
 
         print(username, password, password_repeat)
 
     return render_template('signup.html', title='signup')
 
+
 @app.route('/stories')
 def stories():
     return render_template('stories.html', title='Stories')
 
+
 @app.route('/stories/create/new')
-def newStory():
+def new_story():
     return "new story uwu"

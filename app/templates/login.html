@@ -1,7 +1,21 @@
 {% extends "_base.html" %}
+{% from "_macros.html" import do_flashes %}
+
 
 {% block content %}
     <h3>Login to the story editor</h3>
+
+    {{ do_flashes() }}
+
+    <form method="post">
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text"><br><br>
+
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password"><br><br>
+
+        <input type="submit" value="Log In!"> <br><br>
+    </form>
 
     <a href="{{ url_for('index') }}">back to main</a>
 
