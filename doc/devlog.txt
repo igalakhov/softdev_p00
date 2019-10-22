@@ -10,7 +10,7 @@ galakhovI -- 2019-10-21 8:30
     Began work on database classes
 galakhovI -- 2019-10-21 11:20
     More work on Sign Up form
-linM -- 2019-10-21 11:00
+linM -- 2019-10-21 23:00
     To query data from tables in SQLite, you can use inner join, left join, or cross join
     INNER JOIN: Matches each row from one table with every row from another table based on the join condition specified after the ON keyword
     LEFT JOIN: Selects data from the left table and matching rows in the right table based on the join condition - if a row doesn't have a matching row in the right table, then NULL will be the value of columns in the right table
