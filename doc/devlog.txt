@@ -19,4 +19,7 @@ linM -- 2019-10-21 23:00
 
     The article talks about how there are always going to be problems with our code and it isn't possible to fix everything at once
     When we are having issues or have trouble with something, it's important that everyone knows about it. It could prevent a lot of future confusion and save a lot of time for people trying to figure out what's wrong
-    Putting in detailed comments would also help reduce confusion between members in the group. They could help explain how each part of the code could be used and the specific problems people are having. 
+    Putting in detailed comments would also help reduce confusion between members in the group. They could help explain how each part of the code could be used and the specific problems people are having.
+galakhovI -- 2019-10-22 8:25
+    Finished code for creating database schema
+    Still working on login
