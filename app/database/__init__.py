@@ -1,4 +1,4 @@
-# establish db cursor connection here
+ # establish db cursor connection here
 def execute_command():
     pass
 

@@ -56,3 +56,11 @@ def signup():
         print(username, password, password_repeat)
 
     return render_template('signup.html', title='signup')
+
+@app.route('/stories')
+def stories():
+    return render_template('stories.html', title='Stories')
+
+@app.route('/stories/create/new')
+def newStory():
+    return "new story uwu"
