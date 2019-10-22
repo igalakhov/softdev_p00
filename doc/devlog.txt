@@ -1,3 +1,6 @@
+Team thats important - Justin Shaw, Michael Lin, Eric Lam, Ivan Galakhov
+SoftDev1 pd1
+
 galakhovI -- 2019-10-18 8:40
     Added structure to the project
     Began work on devlog
