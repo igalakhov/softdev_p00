@@ -7,7 +7,9 @@ db_file = 'database.db'
 def execute_command(cmd):
     db = sqlite3.connect('database.db')
     c = db.cursor()
-    return c.execute(cmd)
+    ret = c.execute(cmd)
+    db.commit()
+    return ret
 
 # build the schema
 # WARNING this will delete all the data in the database

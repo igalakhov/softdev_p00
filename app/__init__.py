@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, flash
+from app.database.user import User
 
 app = Flask(__name__)
 
@@ -48,10 +49,15 @@ def signup():
             flash('Passwords do not match!', 'red')
             valid = False
 
-        # TODO: check if username is taken
+        if not User.username_avaliable(username):
+            flash('Username already taken!', 'red')
+            valid = False
 
         if not valid:
             flash('Please fix the above errors before submitting the form again!', 'red')
+        else:
+            User.new_user(username, password)
+            flash('Account created!', 'green')
 
         print(username, password, password_repeat)
 
