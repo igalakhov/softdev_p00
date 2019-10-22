@@ -102,11 +102,18 @@ def signup():
 
     return render_template('signup.html', title='signup')
 
-
+#this should be modified to display stories in the database
 @app.route('/stories')
 def stories():
     storyThreads=[Story(1), Story(2), Story(3)]
     return render_template('stories.html', title='Stories', threads=storyThreads)
+
+#this will be modified to display a story given an id
+@app.route("/stories/<id>")
+def show_story(id):
+    story = Story(id)
+    return "display " + story.title + " by " + story.author + "\n" + story.content
+
 
 
 @app.route('/stories/create/new')
