@@ -3,19 +3,18 @@
 
 {% block content %}
     <div id="login-status" align="right">
-    {# Finish this when log-ins work #}
-        {# {% if logged_in() %} #}
+        {% if logged is none %}
             <a href="{{ url_for('login') }}">Log In</a>
             or
             <a href="{{ url_for('signup') }}">Sign Up</a>
-        {#  {% else %} #}
-            {#  <a href="{{ url_for('profile') }}">Profile</a>  #}
-            {# <a href="{{ url_for('logout') }}">Log Out</a> #}
-        {#  {% endif %} #}
+        {% else %}
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log Out</a>
+        {% endif %}
     </div>
     <h1 align="center">Welcome to Collaborative Stories</h1>
     {{ do_flashes }}
-    {# <a href="{{ url_for('hub') }}">Story Hub</a> #}
+    <p><a href="{{ url_for('stories') }}">Story Hub</a></p>
     <form method="POST" action="/search">
         <input type="text" name="query">
         <input type="submit" name="button" value="Search">
