@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, abort
 
 from app.database.story import Story
 from app.database.user import User
@@ -27,7 +27,7 @@ def make_template_globals():
 @app.route('/index')
 @no_login_required
 def index():
-    return render_template('index.html', title='welcome')
+    return render_template('index.html', title='welcome', logged=current_user())
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -151,8 +151,40 @@ def show_story(id):
     story = Story(id)
     return render_template('storythread.html', to_render=story)
 
+@app.route("/users/<username>")
+@login_required
+def profile(username):
+    if User.get_by_username(username) != None:
+        return render_template('profile.html', to_render=User.get_by_username(username))
+    else:
+        abort(404)
 
-@app.route('/stories/create/new')
+
+@app.route('/stories/create/new', methods=['GET', 'POST'])
 @login_required
 def new_story():
-    return "new story uwu"
+    if 'title' in request.form.keys() and 'content' in request.form.keys():
+
+        # read the data from the form
+        # we can use [] now since we know the key exists
+        title = request.form['title']
+        content = request.form['content']
+
+        # make sure that the form data is valid
+        valid = True
+
+        inrange = lambda a, b, c: b <= a <= c
+
+        if not inrange(len(title), 3, 50):
+            flash('Title should be between 3 and 50 characters!', 'red')
+            valid = False
+
+        if not (len(content), 10, 2500):
+            flash('Story should be between 10 and 2500 characters!', 'red')
+            valid = False
+
+        else:
+            pass
+
+
+    return render_template('newstory.html', title='New Story')

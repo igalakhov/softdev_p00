@@ -2,11 +2,21 @@
 {% from "_macros.html" import do_flashes %}
 
 {% block content %}
-    <h3>Welcome to the story editor</h3>
-
-    {{ do_flashes() }}
-
-    <p><a href="{{ url_for('login') }}">Log In</a></p>
-    <p><a href="{{ url_for('signup') }}">Sign Up</a></p>
-
+    <div id="login-status" align="right">
+        {% if logged is none %}
+            <a href="{{ url_for('login') }}">Log In</a>
+            or
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+        {% else %}
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log Out</a>
+        {% endif %}
+    </div>
+    <h1 align="center">Welcome to Collaborative Stories</h1>
+    {{ do_flashes }}
+    <p><a href="{{ url_for('stories') }}">Story Hub</a></p>
+    <form method="POST" action="/search">
+        <input type="text" name="query">
+        <input type="submit" name="button" value="Search">
+    </form>
 {% endblock content %}

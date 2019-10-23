@@ -1,0 +1,8 @@
+{% extends "_base.html" %}
+{% from "_macros.html" import do_flashes %}
+
+
+{% block content %}
+    <h1>{{ to_render.username }}</h1><br>
+    account created: {{ to_render.time_created }}
+{% endblock content %}

@@ -30,7 +30,7 @@ def login_required(f):
         if 'user_id' in session:
             return f(*args, **kwargs)
         flash('You must be logged in to view [%s]!' % request.path, 'red')
-        return redirect('login')
+        return redirect('/login')
 
     return dec
 
@@ -42,6 +42,6 @@ def no_login_required(f):
         if 'user_id' not in session:
             return f(*args, **kwargs)
         flash('You cannot view [%s] while logged in!' % request.path, 'red')
-        return redirect('home')
+        return redirect('/home')
 
     return dec
