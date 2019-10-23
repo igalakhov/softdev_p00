@@ -42,3 +42,5 @@ lamE -- 2019-10-22 23:50
     Improved home page
     Added skeleton for searching
     Added skeleton for changing homepage based on whether a user is logged in
+lamE -- 2019-10-23 8:30
+    Completed changing homepage based on whether a user is logged in
