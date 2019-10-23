@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, abort
 
 from app.database.story import Story
 from app.database.user import User
@@ -150,6 +150,14 @@ def stories():
 def show_story(id):
     story = Story(id)
     return render_template('storythread.html', to_render=story)
+
+@app.route("/users/<username>")
+@login_required
+def profile(username):
+    #try:
+        return render_template('profile.html', to_render=User.get_by_username(username))
+    #except:
+        #abort(404)
 
 
 @app.route('/stories/create/new', methods=['GET', 'POST'])
