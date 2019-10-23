@@ -155,4 +155,29 @@ def show_story(id):
 @app.route('/stories/create/new')
 @login_required
 def new_story():
-    return "new story uwu"
+    if 'title' in request.form.keys() and \
+            'content' in request.form.keys():
+
+        # read the data from the form
+        # we can use [] now since we know the key exists
+        title = request.form['title']
+        content = request.form['content']
+
+        # make sure that the form data is valid
+        valid = True
+
+        inrange = lambda a, b, c: b <= a <= c
+
+        if not inrange(len(title), 3, 50):
+            flash('Username should be between 3 and 50 characters!', 'red')
+            valid = False
+
+        if not (len(password), 10, 2500):
+            flash('Password should be between 10 and 2500 characters!', 'red')
+            valid = False
+
+        else:
+            pass
+
+
+    return render_template('newstory.html', title='New Story')
