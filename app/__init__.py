@@ -154,10 +154,10 @@ def show_story(id):
 @app.route("/users/<username>")
 @login_required
 def profile(username):
-    #try:
+    if User.get_by_username(username) != None:
         return render_template('profile.html', to_render=User.get_by_username(username))
-    #except:
-        #abort(404)
+    else:
+        abort(404)
 
 
 @app.route('/stories/create/new', methods=['GET', 'POST'])
