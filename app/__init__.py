@@ -152,11 +152,10 @@ def show_story(id):
     return render_template('storythread.html', to_render=story)
 
 
-@app.route('/stories/create/new')
+@app.route('/stories/create/new', methods=['GET', 'POST'])
 @login_required
 def new_story():
-    if 'title' in request.form.keys() and \
-            'content' in request.form.keys():
+    if 'title' in request.form.keys() and 'content' in request.form.keys():
 
         # read the data from the form
         # we can use [] now since we know the key exists
@@ -169,11 +168,11 @@ def new_story():
         inrange = lambda a, b, c: b <= a <= c
 
         if not inrange(len(title), 3, 50):
-            flash('Username should be between 3 and 50 characters!', 'red')
+            flash('Title should be between 3 and 50 characters!', 'red')
             valid = False
 
-        if not (len(password), 10, 2500):
-            flash('Password should be between 10 and 2500 characters!', 'red')
+        if not (len(content), 10, 2500):
+            flash('Story should be between 10 and 2500 characters!', 'red')
             valid = False
 
         else:
