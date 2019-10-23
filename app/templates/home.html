@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+{% from "_macros.html" import do_flashes %}
+
+
+{% block content %}
+    <h3>Welcome, {{ current_user.username }}!</h3>
+
+    {{ do_flashes() }}
+
+    <p>This is the user home page, idk what goes here...</p>
+
+    <a href="{{ url_for('logout') }}">Log Out</a>
+
+{% endblock content %}

@@ -34,3 +34,5 @@ shawJ -- 2019-10-21 10:00
     Started building story and story_addition classes
     Created pages for viewing all stories and each individual story thread
     Edited design doc for clarity
+galakhovI -- 2019-10-22 21:23
+    Finished session management utilities

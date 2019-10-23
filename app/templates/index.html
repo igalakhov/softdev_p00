@@ -1,7 +1,12 @@
 {% extends "_base.html" %}
+{% from "_macros.html" import do_flashes %}
 
 {% block content %}
     <h3>Welcome to the story editor</h3>
+
+    {{ do_flashes() }}
+
     <p><a href="{{ url_for('login') }}">Log In</a></p>
     <p><a href="{{ url_for('signup') }}">Sign Up</a></p>
+
 {% endblock content %}

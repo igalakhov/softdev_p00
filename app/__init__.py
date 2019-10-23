@@ -1,22 +1,37 @@
 import os
 
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, session
 
-from app.database.user import User
 from app.database.story import Story
+from app.database.user import User
+from app.session_management import login_user, logout_user, current_user, login_required, no_login_required
 
 app = Flask(__name__)
 
 app.secret_key = os.urandom(64)
 
 
+# this makes session more permanent
+@app.before_request
+def before_request():
+    session.permanent = True
+
+
+# this basically makes it so we can use current_user in any template we render
+@app.context_processor
+def make_template_globals():
+    return dict(current_user=current_user())
+
+
 @app.route('/')
 @app.route('/index')
+@no_login_required
 def index():
     return render_template('index.html', title='welcome')
 
 
 @app.route('/login', methods=['GET', 'POST'])
+@no_login_required
 def login():
     # check if form was submitted
     if 'username' in request.form.keys() and \
@@ -52,12 +67,15 @@ def login():
             flash('Please fix the above errors before submitting the form again!', 'red')
         else:
             # log in user
+            login_user(to_login)
             flash('Logged In as [%s]' % to_login.username, 'green')
+            return redirect('home')
 
     return render_template('login.html', title='login')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
+@no_login_required
 def signup():
     # check if form was submitted
     if 'username' in request.form.keys() and \
@@ -102,20 +120,39 @@ def signup():
 
     return render_template('signup.html', title='signup')
 
-#this should be modified to display stories in the database
+
+# user home
+@app.route('/home')
+@login_required
+def home():
+    return render_template('home.html', title='user home')
+
+
+# logout user
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('Successfully logged out!', 'green')
+    return redirect('index')
+
+
+# this should be modified to display stories in the database
 @app.route('/stories')
+@login_required
 def stories():
-    storyThreads=[Story(1), Story(2), Story(3)]
+    storyThreads = [Story(1), Story(2), Story(3)]
     return render_template('stories.html', title='Stories', threads=storyThreads)
 
-#this will be modified to display a story given an id
+
+# this will be modified to display a story given an id
 @app.route("/stories/<id>")
+@login_required
 def show_story(id):
     story = Story(id)
     return render_template('storythread.html', title=story.title, thread=story)
 
 
-
 @app.route('/stories/create/new')
+@login_required
 def new_story():
     return "new story uwu"
