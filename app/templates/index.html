@@ -3,17 +3,18 @@
 
 {% block content %}
     <div id="login-status" align="right">
-        {% if logged is none %}
+        {% if current_user is none %}
             <a href="{{ url_for('login') }}">Log In</a>
             or
             <a href="{{ url_for('signup') }}">Sign Up</a>
         {% else %}
-            <a href="{{ url_for('profile') }}">Profile</a>
+            <p>Logged in as {{ current_user.username }}</p>
+            <a href="{{ url_for('home') }}">Home</a>
             <a href="{{ url_for('logout') }}">Log Out</a>
         {% endif %}
     </div>
     <h1 align="center">Welcome to Collaborative Stories</h1>
-    {{ do_flashes }}
+    {{ do_flashes() }}
     <p><a href="{{ url_for('stories') }}">Story Hub</a></p>
     <form method="POST" action="/search">
         <input type="text" name="query">

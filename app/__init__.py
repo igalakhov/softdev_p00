@@ -25,7 +25,6 @@ def make_template_globals():
 
 @app.route('/')
 @app.route('/index')
-@no_login_required
 def index():
     return render_template('index.html', title='welcome', logged=current_user())
 
