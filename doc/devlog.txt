@@ -13,6 +13,8 @@ galakhovI -- 2019-10-21 8:30
     Began work on database classes
 galakhovI -- 2019-10-21 11:20
     More work on Sign Up form
+shawJ -- 2019-10-21 21:00
+    Started building some empty pages and routes
 linM -- 2019-10-21 23:00
     To query data from tables in SQLite, you can use inner join, left join, or cross join
     INNER JOIN: Matches each row from one table with every row from another table based on the join condition specified after the ON keyword
@@ -28,3 +30,7 @@ galakhovI -- 2019-10-22 8:25
     Still working on login
 galakhovI -- 2019-10-22 8:40
     Finished login
+shawJ -- 2019-10-21 10:00
+    Started building story and story_addition classes
+    Created pages for viewing all stories and each individual story thread
+    Edited design doc for clarity
