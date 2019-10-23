@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 
+{% set title = to_render.title %}
 {% block content %}
-    <h1>{{ thread.title }} by {{ thread.author }}</h1><br>
-    {{ thread.content }}
+    <h1>{{ to_render.title }} by {{ to_render.author }}</h1><br>
+    {{ to_render.content }}
 {% endblock content %}
