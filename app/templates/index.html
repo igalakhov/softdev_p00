@@ -2,7 +2,8 @@
 {% from "_macros.html" import do_flashes %}
 
 {% block content %}
-    <div id="login-status" align="right">
+
+    <div align="right">
         {% if current_user is none %}
             <a href="{{ url_for('login') }}">Log In</a>
             or
@@ -13,11 +14,18 @@
             <a href="{{ url_for('logout') }}">Log Out</a>
         {% endif %}
     </div>
+
     <h1 align="center">Welcome to Collaborative Stories</h1>
+
+     <div align="right">
+        <form method="POST" action="/search">
+            <input type="text" name="query">
+            <input type="submit" name="button" value="Search">
+        </form>
+    </div>
+
     {{ do_flashes() }}
+
     <p><a href="{{ url_for('stories') }}">Story Hub</a></p>
-    <form method="POST" action="/search">
-        <input type="text" name="query">
-        <input type="submit" name="button" value="Search">
-    </form>
+
 {% endblock content %}

@@ -3,12 +3,41 @@
 
 
 {% block content %}
-    <h3>Welcome, {{ current_user.username }}!</h3>
+
+    <div align="right">
+        <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+
+    <h1 align="center">Welcome, {{ current_user.username }}!</h1>
 
     {{ do_flashes() }}
 
-    <p>This is the user home page, idk what goes here...</p>
+    <h3>Stories Started</h3>
+    {% if current_user.get_stories() is none %}
+        <p>You haven't started any stories :(</p>
+        <p>Start one <a href="{{ url_for('new_story') }}">here</a>.</p>
+    {% else %}
+        <ul>
+        {%  for story in current_user.get_stories() %}
+            <li>
+                <a href="{{ url_for('show_story', id=story) }}">story</a>
+            </li>
+        {%  endfor %}
+        </ul>
+    {% endif %}
 
-    <a href="{{ url_for('logout') }}">Log Out</a>
+    <h3>Stories Contributed To</h3>
+    {% if current_user.get_story_edits() is none %}
+        <p>You haven't contributed to any stories :(</p>
+        <p>Find one <a href="{{ url_for('stories') }}">here</a>.</p>
+    {% else %}
+        <ul>
+            {%  for story in current_user.get_story_edits() %}
+                <li>
+                    <a href="{{ url_for('show_story', id=story) }}">story</a>
+                </li>
+            {%  endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock content %}

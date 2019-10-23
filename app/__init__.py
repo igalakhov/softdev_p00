@@ -26,7 +26,7 @@ def make_template_globals():
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='welcome', logged=current_user())
+    return render_template('index.html', title='Welcome', logged=current_user())
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -124,7 +124,7 @@ def signup():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('home.html', title='user home')
+    return render_template('home.html', title='Home')
 
 
 # logout user

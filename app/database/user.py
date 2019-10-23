@@ -20,10 +20,10 @@ class User:
         return self.password == to_validate
 
     def get_stories(self):
-        pass
+        return None
 
     def get_story_edits(self):
-        pass
+        return None
 
     # static methods
 
