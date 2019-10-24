@@ -25,7 +25,7 @@ class User:
             return None
         story_ids = list()
         for story in stories:
-            story_ids.append(story)
+            story_ids.append(story[0])
         return story_ids
 
     def get_story_edits(self):
