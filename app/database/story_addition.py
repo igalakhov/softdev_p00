@@ -16,5 +16,5 @@ class StoryAddition:
     # creates a new story addition
     @staticmethod
     def new_story_addition(user, story, content):
-        execute_command('INSERT INTO `story_addition` (content, story.id,user.id)'
+        execute_command('INSERT INTO `story_addition` (content, story_id, author_id)'
                         'VALUES (\"%s\", \"%s\", \"%s\")' % (content, story.id, user.id))
