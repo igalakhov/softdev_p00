@@ -187,7 +187,7 @@ def new_story():
         else:
             newstory_id = Story.new_story(current_user(), title, content)
             flash('Story created successfully', 'green')
-            print(newstory_id)
-            # return redirect(f'/stories/{newstory_id}')
+            #print(newstory_id)
+            return redirect(f'/stories/{newstory_id}')
 
     return render_template('newstory.html', title='New Story')

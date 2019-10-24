@@ -2,7 +2,7 @@ class StoryAddition:
 
     # initialize addition with id
     def __init__(self, id):
-        data = execute_command('SELECT * FROM `story_addition` WHERE `story_addition`.id=%d' % id).fetchall()
+        data = execute_command('SELECT * FROM `story_addition` WHERE `story_addition`.id=%d' % int(id)).fetchall()
         assert (len(data) != 0)  # no making non existing users!
 
         self.id = data[0][0]
