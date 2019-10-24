@@ -16,7 +16,6 @@
     <h3>Stories Started</h3>
     {% if current_user.get_stories() is none %}
         <p>You haven't started any stories :(</p>
-        <p>Start one <a href="{{ url_for('new_story') }}">here</a>.</p>
     {% else %}
         <ul>
         {%  for story in current_user.get_stories() %}
@@ -26,6 +25,8 @@
         {%  endfor %}
         </ul>
     {% endif %}
+    <p>Start one <a href="{{ url_for('new_story') }}">here</a>.</p>
+
 
     <h3>Stories Contributed To</h3>
     {% if current_user.get_story_edits() is none %}

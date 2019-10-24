@@ -20,7 +20,13 @@ class User:
         return self.password == to_validate
 
     def get_stories(self):
-        return None
+        stories = execute_command('SELECT * FROM `story` WHERE `story`.created_by=%d' % self.id).fetchall()
+        if len(stories) == 0:
+            return None
+        story_ids = list()
+        for story in stories:
+            story_ids.append(story)
+        return story_ids
 
     def get_story_edits(self):
         return None

@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, flash, redirect, session, abort
 
 from app.database.story import Story
+from app.database.story_addition import StoryAddition
 from app.database.user import User
 from app.session_management import login_user, logout_user, current_user, login_required, no_login_required
 
@@ -186,6 +187,9 @@ def new_story():
             flash('Please fix the above errors before submitting the form again!', 'red')
         else:
             newstory_id = Story.new_story(current_user(), title, content)
+            s = Story(newstory_id)
+
+            StoryAddition.new_story_addition(current_user(),s,content)
             flash('Story created successfully', 'green')
             #print(newstory_id)
             return redirect(f'/stories/{newstory_id}')

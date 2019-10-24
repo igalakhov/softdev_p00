@@ -3,7 +3,8 @@
 {% block content %}
     stories here uwu<br>
     {% for story in threads %}
-        <a href="stories/{{story.id}}">{{ story.title }} by {{ story.author }}</a><br>
+        <a href="stories/{{story.id}}">{{ story.title }} by {{ story.author.username }}</a><br>
     {%  endfor %}
-    <a href="/stories/create/new">new story</a>
+
+    <p><a href="{{ url_for('home') }}">Home</a></p>
 {% endblock content %}

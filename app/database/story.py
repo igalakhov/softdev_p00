@@ -1,5 +1,5 @@
 from app.database import execute_command
-
+from app.database.user import User
 
 class Story:
 
@@ -10,10 +10,10 @@ class Story:
 
         self.id = id
         self.content = "content_here"
-        self.title = "title_here"
-        self.time = "time_here"
-        self.author = "author_here"  # will be changed to a user object
-        self.first_addition = "id"  # will be changed to a story_addition object
+        self.time = data[0][1]
+        self.title = data[0][2]
+        self.author = User(data[0][3])  # user id - maybe change to user object later
+        self.first_addition = "first_addition"  # will be changed to a story_addition object
 
     # returns a list of story_addition objects
     def get_additions(self):

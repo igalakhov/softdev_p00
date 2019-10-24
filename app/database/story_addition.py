@@ -1,3 +1,5 @@
+from app.database import execute_command
+
 class StoryAddition:
 
     # initialize addition with id
