@@ -181,9 +181,12 @@ def new_story():
         if not (len(content), 10, 2500):
             flash('Story should be between 10 and 2500 characters!', 'red')
             valid = False
-
+        if not valid:
+            flash('Please fix the above errors before submitting the form again!', 'red')
         else:
-            pass
+            newstory_id = new_story(current_user(), title, content)
+            flash('Story created successfully', 'green')
+            return redirect(f'/stories/{newstory_id}')
 
 
     return render_template('newstory.html', title='New Story')
