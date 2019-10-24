@@ -150,6 +150,7 @@ def show_story(id):
     story = Story(id)
     return render_template('storythread.html', to_render=story)
 
+
 @app.route("/users/<username>")
 @login_required
 def profile(username):
@@ -184,6 +185,5 @@ def new_story():
 
         else:
             pass
-
 
     return render_template('newstory.html', title='New Story')

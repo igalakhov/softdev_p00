@@ -23,5 +23,12 @@ class Story:
 
     # creates a new story
     @staticmethod
-    def new_story(user, stater_text):
-        pass
+    def new_story(user, title, stater_text):
+        inserted_id = execute_command(
+            'INSERT INTO `story` '
+            '(title, created_by) '
+            'OUTPUT id '
+            'VALUES ("%s", %d)' % (title, user.id))
+        print(inserted_id)
+
+        return inserted_id
