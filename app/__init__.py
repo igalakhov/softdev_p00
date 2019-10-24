@@ -154,7 +154,7 @@ def show_story(id):
 @app.route("/users/<username>")
 @login_required
 def profile(username):
-    if User.get_by_username(username) != None:
+    if User.get_by_username(username) is not None:
         return render_template('profile.html', to_render=User.get_by_username(username))
     else:
         abort(404)
@@ -185,9 +185,9 @@ def new_story():
         if not valid:
             flash('Please fix the above errors before submitting the form again!', 'red')
         else:
-            newstory_id = new_story(current_user(), title, content)
+            newstory_id = Story.new_story(current_user(), title, content)
             flash('Story created successfully', 'green')
-            return redirect(f'/stories/{newstory_id}')
-
+            print(newstory_id)
+            # return redirect(f'/stories/{newstory_id}')
 
     return render_template('newstory.html', title='New Story')

@@ -10,7 +10,7 @@ class User:
     def __init__(self, id):
         data = execute_command('SELECT * FROM `user` WHERE `user`.id=%d' % id).fetchall()
         assert (len(data) != 0)  # no making non existing users!
-        self.id = data[0][0]
+        self.id = int(data[0][0])
         self.username = data[0][1]
         self.password = data[0][2]
         self.time_created = data[0][3]
