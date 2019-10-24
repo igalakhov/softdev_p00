@@ -22,13 +22,13 @@ def before_request():
 def make_template_globals():
     return dict(current_user=current_user())
 
-
+#displays a starting page that allows a user to login/register
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html', title='Welcome', logged=current_user())
 
-
+#page for user to login
 @app.route('/login', methods=['GET', 'POST'])
 @no_login_required
 def login():
@@ -72,7 +72,7 @@ def login():
 
     return render_template('login.html', title='login')
 
-
+#page for user to register for the site
 @app.route('/signup', methods=['GET', 'POST'])
 @no_login_required
 def signup():
@@ -150,6 +150,7 @@ def show_story(id):
     story = Story(id)
     return render_template('storythread.html', to_render=story)
 
+#displays a user profile
 @app.route("/users/<username>")
 @login_required
 def profile(username):
@@ -158,7 +159,7 @@ def profile(username):
     else:
         abort(404)
 
-
+#displays a form to create a new story
 @app.route('/stories/create/new', methods=['GET', 'POST'])
 @login_required
 def new_story():
@@ -181,9 +182,12 @@ def new_story():
         if not (len(content), 10, 2500):
             flash('Story should be between 10 and 2500 characters!', 'red')
             valid = False
-
+        if not valid:
+            flash('Please fix the above errors before submitting the form again!', 'red')
         else:
-            pass
+            newstory_id = new_story(current_user(), title, content)
+            flash('Story created successfully', 'green')
+            return redirect(f'/stories/{newstory_id}')
 
 
     return render_template('newstory.html', title='New Story')
