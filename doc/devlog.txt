@@ -49,3 +49,5 @@ galakhovI -- 2019-10-23 8:40
 lamE -- 2019-10-23 10:56
     Cleaned up user homepage
     User homepage now displays created stories and stories contributed to
+lamE -- 2019-10-24 8:10
+    Cleaned up login and sign up pages

@@ -3,7 +3,12 @@
 
 
 {% block content %}
-    <h3>Login to the story editor</h3>
+
+    <div align="right">
+        <a href="{{ url_for('index') }}">Back</a>
+    </div>
+
+    <h1 align="center">Login</h1>
 
     {{ do_flashes() }}
 
@@ -16,7 +21,5 @@
 
         <input type="submit" value="Log In!"> <br><br>
     </form>
-
-    <a href="{{ url_for('index') }}">back to main</a>
 
 {% endblock content %}
