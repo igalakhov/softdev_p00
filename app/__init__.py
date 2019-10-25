@@ -69,7 +69,7 @@ def login():
             # log in user
             login_user(to_login)
             flash('Logged In as [%s]' % to_login.username, 'green')
-            return redirect('home')
+            return redirect('profile')
 
     return render_template('login.html', title='login')
 
@@ -121,11 +121,11 @@ def signup():
     return render_template('signup.html', title='signup')
 
 
-# user home
-@app.route('/home')
+# user profile
+@app.route('/profile')
 @login_required
-def home():
-    return render_template('home.html', title='Home')
+def profile():
+    return render_template('profile.html', title='Profile')
 
 
 # logout user
@@ -150,15 +150,6 @@ def stories():
 def show_story(id):
     story = Story(id)
     return render_template('storythread.html', to_render=story)
-
-#displays a user profile
-@app.route("/users/<username>")
-@login_required
-def profile(username):
-    if User.get_by_username(username) is not None:
-        return render_template('profile.html', to_render=User.get_by_username(username))
-    else:
-        abort(404)
 
 #displays a form to create a new story
 @app.route('/stories/create/new', methods=['GET', 'POST'])
