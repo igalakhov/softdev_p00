@@ -151,15 +151,6 @@ def show_story(id):
     story = Story(id)
     return render_template('storythread.html', to_render=story)
 
-#displays a user profile
-@app.route("/users/<username>")
-@login_required
-def profile(username):
-    if User.get_by_username(username) is not None:
-        return render_template('profile.html', to_render=User.get_by_username(username))
-    else:
-        abort(404)
-
 #displays a form to create a new story
 @app.route('/stories/create/new', methods=['GET', 'POST'])
 @login_required

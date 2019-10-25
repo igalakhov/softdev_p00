@@ -3,7 +3,12 @@
 {% from "_macros.html" import do_flashes %}
 
 {% block content %}
-    <h3>Create a New Story</h3>
+
+    <div align="right">
+        <a href="{{ url_for('home') }}">Home</a>
+    </div>
+
+    <h1>Create a New Story</h1>
 
     {{ do_flashes() }}
 
