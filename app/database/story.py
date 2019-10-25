@@ -35,3 +35,14 @@ class Story:
             'ORDER BY id DESC LIMIT 1').fetchall()[0][0])
 
         return inserted_id
+
+    @staticmethod
+    def get_all_stories():
+        data = execute_command(
+            'SELECT id FROM `story` '
+            'ORDER BY id DESC LIMIT 1').fetchall()
+
+        stories = list()
+        for s in data:
+            stories.append(Story(s[0]))
+        return stories

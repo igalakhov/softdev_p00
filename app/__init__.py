@@ -140,7 +140,7 @@ def logout():
 @app.route('/stories')
 @login_required
 def stories():
-    storyThreads = [Story(1), Story(2), Story(3)]
+    storyThreads = Story.get_all_stories()
     return render_template('stories.html', title='Stories', threads=storyThreads)
 
 
