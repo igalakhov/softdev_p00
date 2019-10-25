@@ -69,7 +69,7 @@ def login():
             # log in user
             login_user(to_login)
             flash('Logged In as [%s]' % to_login.username, 'green')
-            return redirect('home')
+            return redirect('profile')g
 
     return render_template('login.html', title='login')
 
@@ -121,11 +121,11 @@ def signup():
     return render_template('signup.html', title='signup')
 
 
-# user home
-@app.route('/home')
+# user profile
+@app.route('/profile')
 @login_required
-def home():
-    return render_template('home.html', title='Home')
+def profile():
+    return render_template('profile.html', title='Profile')
 
 
 # logout user
