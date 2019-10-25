@@ -69,7 +69,7 @@ def login():
             # log in user
             login_user(to_login)
             flash('Logged In as [%s]' % to_login.username, 'green')
-            return redirect('profile')g
+            return redirect('profile')
 
     return render_template('login.html', title='login')
 
