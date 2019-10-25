@@ -4,4 +4,6 @@
 {% block content %}
     <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1><br>
     {{ to_render.first_addition }}
+
+    <p><a href="{{ url_for('home') }}">Home</a></p>
 {% endblock content %}
