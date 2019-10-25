@@ -20,7 +20,7 @@
         <ul>
         {%  for story in current_user.get_stories() %}
             <li>
-                <a href="{{ url_for('show_story', id=story) }}">story</a>
+                <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
             </li>
         {%  endfor %}
         </ul>

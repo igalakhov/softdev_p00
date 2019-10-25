@@ -57,4 +57,4 @@ galakhovI -- 2019-10-24 8:40
 linM -- 2019-10-24 18:53
     Finished story_addition object
     Put a link on each page that takes you back to /home
-    Storied started now show on homepage
+    Stories started now show on homepage
