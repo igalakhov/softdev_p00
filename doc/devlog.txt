@@ -61,3 +61,7 @@ linM -- 2019-10-24 18:53
 linM -- 2019-10-25 21:21
     Users can now add to existing stories
     Users can now only see the whole story if they've contributed before
+lamE -- 2019-10-26 1:25
+    Sitewide appearance overhaul
+    Added navigation links
+    Added toggling of author names in a story thread
