@@ -5,7 +5,8 @@
 {% block content %}
 
     <div align="right">
-        <a href="{{ url_for('index') }}">Back</a>
+        <a href="{{ url_for('index') }}">Home</a><br>
+        <a href="{{ url_for('login') }}">Log In</a>
     </div>
 
     <h1 align="center">Sign Up</h1>
@@ -19,7 +20,7 @@
         <label for="password">Password:</label>
         <input id="password" name="password" type="password"><br><br>
 
-        <label for="password_repeat">Repeat Password</label>
+        <label for="password_repeat">Repeat Password:</label>
         <input id="password_repeat" name="password_repeat" type="password"><br><br>
 
         <input type="submit" value="Sign Up!">
