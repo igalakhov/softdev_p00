@@ -1,7 +1,7 @@
 {% extends "_base.html" %}
 
 {% block content %}
-
+    <h1>Stories</h1>
     {% for story in threads %}
         <a href="stories/{{story.id}}">{{ story.title }} by {{ story.author.username }}</a><br>
     {%  endfor %}

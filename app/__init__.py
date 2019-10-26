@@ -165,7 +165,6 @@ def show_story(id):
         if not valid:
             flash('Please fix the above errors before submitting the form again!', 'red')
         else:
-            #user,story,content
             StoryAddition.new_story_addition(current_user(), story, addition)
             flash('Added successfully', 'green')
             return redirect(f'/stories/{id}')

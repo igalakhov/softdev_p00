@@ -4,12 +4,13 @@
 
 {% set title = to_render.title %}
 {% block content %}
-    <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1><br>
-    {{ to_render.get_additions()[-1].content }}<br><br>
+    <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1>
 
     {{ do_flashes() }}
 
     {% if not has_added_to %}
+    {{ to_render.get_additions()[-1].content }}<br><br>
+
     <form method="post">
         Add to the story:<br>
         <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
@@ -18,7 +19,9 @@
     </form>
 
     {% else %}
-
+        {%  for addition in to_render.get_additions() %}
+            <p> {{ addition.content }} </p>
+        {% endfor %}
     {% endif %}
     <p><a href="{{ url_for('profile') }}">Profile</a></p>
 {% endblock content %}

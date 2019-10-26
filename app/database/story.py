@@ -21,8 +21,9 @@ class Story:
 
     # returns a list of story_addition objects
     def get_additions(self):
+        story_addition = execute_command('SELECT * FROM `story_addition` ').fetchall()
         additions = execute_command(
-            'SELECT id FROM `story_addition` WHERE story_id=%d ORDER BY id DESC LIMIT 1' % int(self.id)).fetchall()
+            'SELECT id FROM `story_addition` WHERE story_id=%d' % int(self.id)).fetchall()
         a = list()
         for addition in additions:
             a.append(StoryAddition(addition[0]))
