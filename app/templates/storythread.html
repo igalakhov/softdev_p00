@@ -16,27 +16,26 @@
 
     {{ do_flashes() }}
 
-    <div align="right">
-        <form method="POST">
-            {% if show_authors %}
-                <input type="submit" name="hide" value="Hide Authors">
-            {% else %}
-                <input type="submit" name="show" value="Show Authors">
-            {% endif %}
-        </form>
-    </div>
-
     {% if not has_added_to %}
-    {{ to_render.get_additions()[-1].content }}<br><br>
+        {{ to_render.get_additions()[-1].content }}<br><br>
 
-    <form method="post">
-        Add to the story:<br>
-        <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
+        <form method="post">
+            Add to the story:<br>
+            <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
 
-        <input type="submit" value="Add to Story">
-    </form>
+            <input type="submit" value="Add to Story">
+        </form>
 
     {% else %}
+         <div align="right">
+            <form method="POST">
+                {% if show_authors %}
+                    <input type="submit" name="hide" value="Hide Authors">
+                {% else %}
+                    <input type="submit" name="show" value="Show Authors">
+                {% endif %}
+            </form>
+        </div>
         {%  for addition in to_render.get_additions() %}
             {% if show_authors %}
                 <b><a href="{{ url_for('userprofile', username=addition.author.username) }}">{{ addition.author.username }}</a></b><br>

@@ -59,12 +59,14 @@ def login():
         auth_valid = True
 
         if to_login is None:
+            flash('That username does not belong to a registered account!','red')
             auth_valid = False
         elif not to_login.validate_password(password):
+            flash('Incorrect password!','red')
             auth_valid = False
 
         if not valid or not auth_valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             # log in user
             login_user(to_login)
@@ -110,7 +112,7 @@ def signup():
             valid = False
 
         if not valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             User.new_user(username, password)
             flash('Account created! Log In below!', 'green')
@@ -171,7 +173,7 @@ def show_story(id):
             flash('Story addition should be between 10 and 2500 characters!', 'red')
             valid = False
         if not valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             StoryAddition.new_story_addition(current_user(), story, addition)
             flash('Added successfully', 'green')
@@ -205,7 +207,7 @@ def new_story():
             flash('Story should be between 10 and 2500 characters!', 'red')
             valid = False
         if not valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             newstory_id = Story.new_story(current_user(), title, content)
             s = Story(newstory_id)
