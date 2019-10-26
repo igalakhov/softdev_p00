@@ -17,7 +17,7 @@
 
     <h3>Stories Started</h3>
     {% if to_render.get_stories() is none %}
-        <p>{{ to_render.username }} hasn't started any stories :(</p>
+        <p>{{ to_render.username }} has not started any stories :(</p>
     {% else %}
         <ul>
         {%  for story in to_render.get_stories() %}
@@ -31,7 +31,7 @@
 
     <h3>Stories Contributed To</h3>
     {% if to_render.get_story_edits() is none %}
-        <p>{{ to_render.username }} hasn't contributed to any stories :(</p>
+        <p>{{ to_render.username }} has not contributed to any stories :(</p>
     {% else %}
         <ul>
             {%  for story in to_render.get_story_edits() %}
