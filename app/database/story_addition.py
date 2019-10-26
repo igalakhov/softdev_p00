@@ -1,4 +1,5 @@
 from app.database import execute_command
+from app.database.user import User
 
 class StoryAddition:
 
@@ -11,7 +12,7 @@ class StoryAddition:
         self.time_created = data[0][1]
         self.content = data[0][2]
         self.story_id = data[0][3]
-        self.author_id = data[0][4]
+        self.author = User(data[0][4])
 
     # static methods
 
@@ -21,6 +22,4 @@ class StoryAddition:
         execute_command('INSERT INTO `story_addition` (content, story_id, author_id)'
                         'VALUES (\"%s\", \"%s\", \"%s\")' % (content, story.id, user.id))
 
-    # gets the username of the author 
-    def author_name(self):
-        return execute_command('SELECT username FROM `user` INNER JOIN `story_addition` ON user.id = story_addition.author_id WHERE `story_addition`.author_id=%d' % int(self.author_id)).fetchall()[0][0]
+
