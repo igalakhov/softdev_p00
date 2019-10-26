@@ -127,6 +127,14 @@ def signup():
 def profile():
     return render_template('profile.html', title='Profile')
 
+# other user profiles
+@app.route('/profiles/<username>')
+@login_required
+def userprofile(username):
+    if username == current_user().username:
+        return redirect("/profile")
+    return render_template('userprofile.html', title=f"{username}'s Profile", to_render=User.get_by_username(username))
+
 
 # logout user
 @app.route('/logout')

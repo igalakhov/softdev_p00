@@ -9,36 +9,34 @@
         <a href="/profile">My Profile</a>
     </div>
 
-    <h1 align="center">Welcome, {{ current_user.username }}!</h1>
+    <h1 align="center">{{ to_render.username }}</h1>
 
     {{ do_flashes() }}
 
     <h3>Stories Started</h3>
-    {% if current_user.get_stories() is none %}
+    {% if to_render.get_stories() is none %}
         <p>You haven't started any stories :(</p>
     {% else %}
         <ul>
-        {%  for story in current_user.get_stories() %}
+        {%  for story in to_render.get_stories() %}
             <li>
                 <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
             </li>
         {%  endfor %}
         </ul>
     {% endif %}
-    <p>Start one <a href="{{ url_for('new_story') }}">here</a>.</p>
 
 
     <h3>Stories Contributed To</h3>
-    {% if current_user.get_story_edits() is none %}
+    {% if to_render.get_story_edits() is none %}
         <p>You haven't contributed to any stories :(</p>
     {% else %}
         <ul>
-            {%  for story in current_user.get_story_edits() %}
+            {%  for story in to_render.get_story_edits() %}
                 <li>
                     <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
                 </li>
             {%  endfor %}
         </ul>
     {% endif %}
-    <p>Find one <a href="{{ url_for('stories') }}">here</a>.</p>
 {% endblock content %}
