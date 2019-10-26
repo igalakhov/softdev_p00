@@ -58,3 +58,6 @@ linM -- 2019-10-24 18:53
     Finished story_addition object
     Put a link on each page that takes you back to /home
     Stories started now show on homepage
+linM -- 2019-10-25 21:21
+    Users can now add to existing stories
+    Users can now only see the whole story if they've contributed before
