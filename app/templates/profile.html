@@ -31,15 +31,14 @@
     <h3>Stories Contributed To</h3>
     {% if current_user.get_story_edits() is none %}
         <p>You haven't contributed to any stories :(</p>
-        <p>Find one <a href="{{ url_for('stories') }}">here</a>.</p>
     {% else %}
         <ul>
             {%  for story in current_user.get_story_edits() %}
                 <li>
-                    <a href="{{ url_for('show_story', id=story) }}">story</a>
+                    <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
                 </li>
             {%  endfor %}
         </ul>
     {% endif %}
-
+    <p>Find one <a href="{{ url_for('stories') }}">here</a>.</p>
 {% endblock content %}

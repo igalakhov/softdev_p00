@@ -1,10 +1,22 @@
 {% extends "_base.html" %}
 
+{% from "_macros.html" import do_flashes %}
+
 {% set title = to_render.title %}
 {% block content %}
     <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1><br>
-    {{ to_render.first_addition }}
+    {{ to_render.last_addition.content }}<br><br>
 
+    {{ do_flashes() }}
+
+    {% if not has_added_to %}
+    <form method="post">
+        Add to the story:<br>
+        <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
+
+        <input type="submit" value="Add to Story">
+    </form>
+    {% endif %}
     <p><a href="{{ url_for('profile') }}">Profile</a></p>
 {% endblock content %}
 

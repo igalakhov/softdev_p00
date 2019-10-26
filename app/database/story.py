@@ -1,12 +1,15 @@
 from app.database import execute_command
 from app.database.user import User
-
+from app.database.story_addition import StoryAddition
 class Story:
 
     # initialize story with id
     def __init__(self, id):
         data = execute_command('SELECT * FROM `story` WHERE `story`.id=%d' % int(id)).fetchall()
-        assert (len(data) != 0)  # no making non existing users!
+        assert (len(data) != 0)
+        last = StoryAddition(int(execute_command(
+            'SELECT id FROM `story_addition` WHERE story_id=%d ORDER BY id DESC LIMIT 1' % int(id)).fetchall()[0][0]))
+        added = execute_command('SELECT author_id FROM `story_addition` WHERE `story_addition`.story_id=%d' % int(id)).fetchall()
 
         self.id = id
         self.content = "content_here"
@@ -14,6 +17,10 @@ class Story:
         self.title = data[0][2]
         self.author = User(data[0][3])  # user id - maybe change to user object later
         self.first_addition = "first_addition"  # will be changed to a story_addition object
+        self.last_addition = last
+        self.added = list()  # ids of all the users who added to the story
+        for a in added:
+            self.added.append(a[0])
 
     # returns a list of story_addition objects
     def get_additions(self):

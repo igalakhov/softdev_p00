@@ -145,11 +145,31 @@ def stories():
 
 
 # this will be modified to display a story given an id
-@app.route("/stories/<id>")
+@app.route("/stories/<id>", methods=['GET', 'POST'])
 @login_required
 def show_story(id):
     story = Story(id)
-    return render_template('storythread.html', to_render=story)
+    has_added_to = current_user().id in story.added
+    if 'addition' in request.form.keys():
+        addition = request.form['addition']
+
+        # make sure that the form data is valid
+        valid = True
+
+        inrange = lambda a, b, c: b <= a <= c
+
+        if not inrange(len(addition), 10, 2500):
+            flash('Story addition should be between 10 and 2500 characters!', 'red')
+            valid = False
+        if not valid:
+            flash('Please fix the above errors before submitting the form again!', 'red')
+        else:
+            #user,story,content
+            StoryAddition.new_story_addition(current_user(), story, addition)
+            flash('Added successfully', 'green')
+            return redirect(f'/stories/{id}')
+
+    return render_template('storythread.html', to_render=story, has_added_to = has_added_to)
 
 #displays a form to create a new story
 @app.route('/stories/create/new', methods=['GET', 'POST'])
@@ -171,7 +191,7 @@ def new_story():
             flash('Title should be between 3 and 50 characters!', 'red')
             valid = False
 
-        if not (len(content), 10, 2500):
+        if not inrange(len(content), 10, 2500):
             flash('Story should be between 10 and 2500 characters!', 'red')
             valid = False
         if not valid:

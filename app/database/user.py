@@ -20,15 +20,6 @@ class User:
         return self.password == to_validate
 
     def get_stories(self):
-        """
-        stories = execute_command('SELECT * FROM `story` WHERE `story`.created_by=%d' % self.id).fetchall()
-        if len(stories) == 0:
-            return None
-        story_ids = list()
-        for story in stories:
-            story_ids.append(story[0])
-        return story_ids
-        """
         data = execute_command('SELECT * FROM `story` WHERE `story`.created_by=%d' % self.id).fetchall()
         if len(data) == 0:
             return None
@@ -36,8 +27,15 @@ class User:
         for s in data:
             stories.append(story.Story(s[0]))
         return stories
+
     def get_story_edits(self):
-        return None
+        data = execute_command('SELECT story_id FROM `story_addition` WHERE `story_addition`.author_id=%d' % self.id).fetchall()
+        if len(data) == 0:
+            return None
+        stories = list()
+        for s in data:
+            stories.append(story.Story(s[0]))
+        return stories
 
     # static methods
 
