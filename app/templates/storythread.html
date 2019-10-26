@@ -4,9 +4,27 @@
 
 {% set title = to_render.title %}
 {% block content %}
+
+    <div align="right">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('stories') }}">Story Hub</a>
+        <a href="{{ url_for('profile') }}">My Profile</a><br>
+        <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+
     <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1>
 
     {{ do_flashes() }}
+
+    <div align="right">
+        <form method="POST">
+            {% if show_authors %}
+                <input type="submit" name="hide" value="Hide Authors">
+            {% else %}
+                <input type="submit" name="show" value="Show Authors">
+            {% endif %}
+        </form>
+    </div>
 
     {% if not has_added_to %}
     {{ to_render.get_additions()[-1].content }}<br><br>
@@ -20,10 +38,12 @@
 
     {% else %}
         {%  for addition in to_render.get_additions() %}
-            <b><a href="/profiles/{{ addition.author.username }}">{{ addition.author.username }}</a></b><br>
+            {% if show_authors %}
+                <b><a href="{{ url_for('userprofile', username=addition.author.username) }}">{{ addition.author.username }}</a></b><br>
+            {% endif %}
             <p> {{ addition.content }} </p>
         {% endfor %}
     {% endif %}
-    <p><a href="{{ url_for('profile') }}">Profile</a></p>
+
 {% endblock content %}
 

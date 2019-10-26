@@ -28,6 +28,8 @@ def login_required(f):
     @wraps(f)
     def dec(*args, **kwargs):
         if 'user_id' in session:
+            for arg in args:
+                print(arg)
             return f(*args, **kwargs)
         flash('You must be logged in to view [%s]!' % request.path, 'red')
         return redirect('/login')

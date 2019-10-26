@@ -71,7 +71,7 @@ def login():
             flash('Logged In as [%s]' % to_login.username, 'green')
             return redirect('profile')
 
-    return render_template('login.html', title='login')
+    return render_template('login.html', title='Log In')
 
 #page for user to register for the site
 @app.route('/signup', methods=['GET', 'POST'])
@@ -118,17 +118,17 @@ def signup():
 
         print(username, password, password_repeat)
 
-    return render_template('signup.html', title='signup')
+    return render_template('signup.html', title='Sign Up')
 
 
 # user profile
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', title='Profile')
+    return render_template('profile.html', title='My Profile')
 
 # other user profiles
-@app.route('/profiles/<username>')
+@app.route('/profile/<username>')
 @login_required
 def userprofile(username):
     if username == current_user().username:
@@ -149,7 +149,7 @@ def logout():
 @login_required
 def stories():
     storyThreads = Story.get_all_stories()
-    return render_template('stories.html', title='Stories', threads=storyThreads)
+    return render_template('stories.html', title='Story Hub', threads=storyThreads)
 
 
 # this will be modified to display a story given an id
@@ -177,7 +177,9 @@ def show_story(id):
             flash('Added successfully', 'green')
             return redirect(f'/stories/{id}')
 
-    return render_template('storythread.html', to_render=story, has_added_to = has_added_to)
+    show = "show" in request.form.keys()
+
+    return render_template('storythread.html', to_render=story, has_added_to = has_added_to, show_authors=show)
 
 #displays a form to create a new story
 @app.route('/stories/create/new', methods=['GET', 'POST'])
