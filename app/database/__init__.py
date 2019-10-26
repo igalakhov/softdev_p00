@@ -24,7 +24,7 @@ def build_schema():
                     '(id INTEGER PRIMARY KEY, '
                     'username VARCHAR, '
                     'password BLOB, '
-                    'time_created TIMESTAMP)')
+                    'time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP)')
 
     execute_command('CREATE TABLE `story`'
                     '(id INTEGER PRIMARY KEY,'

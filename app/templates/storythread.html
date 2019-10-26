@@ -20,6 +20,7 @@
 
     {% else %}
         {%  for addition in to_render.get_additions() %}
+            <b><a href="/profiles/{{ addition.author_name() }}">{{ addition.author_name() }}</a></b><br>
             <p> {{ addition.content }} </p>
         {% endfor %}
     {% endif %}
