@@ -150,6 +150,7 @@ def stories():
 def show_story(id):
     story = Story(id)
     has_added_to = current_user().id in story.added
+
     if 'addition' in request.form.keys():
         addition = request.form['addition']
 
@@ -200,7 +201,6 @@ def new_story():
             newstory_id = Story.new_story(current_user(), title, content)
             s = Story(newstory_id)
 
-            StoryAddition.new_story_addition(current_user(),s,content)
             flash('Story created successfully', 'green')
             #print(newstory_id)
             return redirect(f'/stories/{newstory_id}')
