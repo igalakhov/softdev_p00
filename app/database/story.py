@@ -51,7 +51,7 @@ class Story:
     def get_all_stories():
         data = execute_command(
             'SELECT id FROM `story` '
-            'ORDER BY id DESC LIMIT 1').fetchall()
+            'ORDER BY id DESC').fetchall()
 
         stories = list()
         for s in data:

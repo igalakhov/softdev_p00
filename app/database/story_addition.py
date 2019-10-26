@@ -20,3 +20,7 @@ class StoryAddition:
     def new_story_addition(user, story, content):
         execute_command('INSERT INTO `story_addition` (content, story_id, author_id)'
                         'VALUES (\"%s\", \"%s\", \"%s\")' % (content, story.id, user.id))
+
+    # gets the username of the author 
+    def author_name(self):
+        return execute_command('SELECT username FROM `user` INNER JOIN `story_addition` ON user.id = story_addition.author_id WHERE `story_addition`.author_id=%d' % int(self.author_id)).fetchall()[0][0]
