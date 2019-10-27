@@ -65,3 +65,5 @@ lamE -- 2019-10-26 1:25
     Sitewide appearance overhaul
     Added navigation links
     Added toggling of author names in a story thread
+galakhovI -- 2019-10-27 11:13
+    Added requirements.txt
