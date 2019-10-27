@@ -18,7 +18,7 @@
     {{ do_flashes() }}
     <p>Start a new story <a href="{{ url_for('new_story') }}">here</a>.</p>
     {% if search %}
-        {{threads|length}} results found for '{{ search }}'<br>
+        {{threads|length}} results found for '{{ search }}':<br><br>
         {% if threads|length > 0 %}
             {% for story in threads %}
                 <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }} by {{ story.author.username }}</a><br>
