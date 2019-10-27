@@ -122,6 +122,26 @@ def signup():
 
     return render_template('signup.html', title='Sign Up')
 
+@app.route('/search', methods=['GET', 'POST'])
+@login_required
+def search():
+    storyThreads = []
+    query = None
+    if 'query' in request.form.keys() and len(request.form['query']) > 0:
+
+        # read the data from the form
+        # we can use [] now since we know the key exists
+        query = request.form['query']
+        for s in Story.get_all_stories():
+            if query.lower() in s.title.lower():
+                storyThreads.append(s)
+        if len(storyThreads) > 0:
+            display = True
+        print(query)
+    else:
+        flash('Missing search query', 'red')
+    return render_template('search.html', title='Search', threads=storyThreads, search=query)
+
 
 # user profile
 @app.route('/profile')
