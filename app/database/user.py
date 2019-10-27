@@ -4,6 +4,7 @@
 
 from app.database import execute_command
 from . import story
+import datetime
 
 class User:
 
@@ -58,5 +59,5 @@ class User:
     @staticmethod
     def new_user(username, password):
 
-        execute_command('INSERT INTO `user` (username, password)'
-                        'VALUES (\"%s\", \"%s\")' % (username, password))
+        execute_command('INSERT INTO `user` (username, password, time_created)'
+                        'VALUES (\"%s\", \"%s\", \"%s\")' % (username, password, datetime.datetime.now()))

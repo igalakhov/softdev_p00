@@ -1,6 +1,8 @@
 from app.database import execute_command
 from app.database.user import User
 from app.database.story_addition import StoryAddition
+import datetime
+
 class Story:
 
     # initialize story with id
@@ -36,8 +38,8 @@ class Story:
     def new_story(user, title, content):
         execute_command(
             'INSERT INTO `story` '
-            '(title, created_by) '
-            'VALUES ("%s", %d);' % (title, user.id))
+            '(title, created_by, time_created) '
+            'VALUES ("%s", %d, "%s");' % (title, user.id, datetime.datetime.now()))
 
         # TODO: find a better way to do this lol
         inserted_id = int(execute_command(

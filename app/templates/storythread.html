@@ -38,7 +38,8 @@
         </div>
         {%  for addition in to_render.get_additions() %}
             {% if show_authors %}
-                <b><a href="{{ url_for('userprofile', username=addition.author.username) }}">{{ addition.author.username }}</a></b><br>
+                <b><a href="{{ url_for('userprofile', username=addition.author.username) }}">{{ addition.author.username }}</a></b>
+                <div align="right">{{ addition.time_created }}</div><br>
             {% endif %}
             <p> {{ addition.content }} </p>
         {% endfor %}

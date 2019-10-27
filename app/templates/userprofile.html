@@ -15,6 +15,7 @@
 
     {{ do_flashes() }}
 
+    Account created {{ to_render.time_created }}
     <h3>Stories Started</h3>
     {% if to_render.get_stories() is none %}
         <p>{{ to_render.username }} hasn't started any stories :(</p>
