@@ -12,7 +12,7 @@
         <a href="{{ url_for('logout') }}">Log Out</a>
     </div>
 
-    <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1>
+    <h1>{{ to_render.title }} by <a href="{{ url_for('userprofile', username=to_render.author.username) }}">{{ to_render.author.username }}</a></h1>
 
     {{ do_flashes() }}
 
