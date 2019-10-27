@@ -10,13 +10,10 @@ class Story:
         data = execute_command('SELECT * FROM `story` WHERE `story`.id=%d' % int(id)).fetchall()
         assert (len(data) != 0)
         added = execute_command('SELECT author_id FROM `story_addition` WHERE `story_addition`.story_id=%d' % int(id)).fetchall()
-
         self.id = id
-        self.content = "content_here"
-        self.time = data[0][1]
+        self.time_created = data[0][1]
         self.title = data[0][2]
         self.author = User(data[0][3])  # user id - maybe change to user object later
-        self.first_addition = "first_addition"  # will be changed to a story_addition object
         self.added = list()  # ids of all the users who added to the story
         for a in added:
             self.added.append(a[0])
