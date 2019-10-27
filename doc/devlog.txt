@@ -80,7 +80,9 @@ galakhovI -- 2019-10-27 11:13
     Added requirements.txt
 galakhovI -- 2019-10-27 11:55
     Added instructions on how to run the project
-shawJ -- 2019-10-27 4:00
+shawJ -- 2019-10-27 16:00
     Added timestamps
-shawJ -- 2019-10-27 5:50
+shawJ -- 2019-10-27 17:50
     Updated design docs
+shawJ -- 2019-10-27 19:04
+    Added search query
