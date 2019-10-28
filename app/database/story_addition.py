@@ -21,7 +21,6 @@ class StoryAddition:
     # creates a new story addition
     @staticmethod
     def new_story_addition(user, story, content):
+        content = content.replace('"',r'""')
         execute_command('INSERT INTO `story_addition` (content, story_id, author_id, time_created)'
                         'VALUES (\"%s\", \"%s\", \"%s\", \"%s\")' % (content, story.id, user.id, datetime.datetime.now()))
-
-
