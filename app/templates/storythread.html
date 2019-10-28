@@ -1,9 +1,57 @@
 {% extends "_base.html" %}
 
+{% from "_macros.html" import do_flashes %}
+
 {% set title = to_render.title %}
 {% block content %}
+<<<<<<< HEAD
     <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1><br>
     {{ to_render.first_addition }}
 
     <p><a href="{{ url_for('home') }}">Home</a></p>
 {% endblock content %}
+=======
+
+    <div align="right">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('stories') }}">Story Hub</a>
+        <a href="{{ url_for('profile') }}">My Profile</a><br>
+        <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+
+    <h1>{{ to_render.title }} by <a href="{{ url_for('userprofile', username=to_render.author.username) }}">{{ to_render.author.username }}</a></h1>
+
+    {{ do_flashes() }}
+
+    {% if not has_added_to %}
+        {{ to_render.get_additions()[-1].content }}<br><br>
+
+        <form method="post">
+            Add to the story:<br>
+            <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
+
+            <input type="submit" value="Add to Story">
+        </form>
+
+    {% else %}
+         <div align="right">
+            <form method="POST">
+                {% if show_authors %}
+                    <input type="submit" name="hide" value="Hide Authors">
+                {% else %}
+                    <input type="submit" name="show" value="Show Authors">
+                {% endif %}
+            </form>
+        </div>
+        {%  for addition in to_render.get_additions() %}
+            {% if show_authors %}
+                <b><a href="{{ url_for('userprofile', username=addition.author.username) }}">{{ addition.author.username }}</a></b>
+                <div align="right">{{ addition.time_created }}</div><br>
+            {% endif %}
+            <p> {{ addition.content }} </p>
+        {% endfor %}
+    {% endif %}
+
+{% endblock content %}
+
+>>>>>>> 9c952bf9c15f7dd7ae7dec386b091fff49e28c8a

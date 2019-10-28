@@ -59,19 +59,21 @@ def login():
         auth_valid = True
 
         if to_login is None:
+            flash('That username does not belong to a registered account!','red')
             auth_valid = False
         elif not to_login.validate_password(password):
+            flash('Incorrect password!','red')
             auth_valid = False
 
         if not valid or not auth_valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             # log in user
             login_user(to_login)
             flash('Logged In as [%s]' % to_login.username, 'green')
             return redirect('profile')
 
-    return render_template('login.html', title='login')
+    return render_template('login.html', title='Log In')
 
 #page for user to register for the site
 @app.route('/signup', methods=['GET', 'POST'])
@@ -110,7 +112,7 @@ def signup():
             valid = False
 
         if not valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             User.new_user(username, password)
             flash('Account created! Log In below!', 'green')
@@ -118,14 +120,42 @@ def signup():
 
         print(username, password, password_repeat)
 
-    return render_template('signup.html', title='signup')
+    return render_template('signup.html', title='Sign Up')
+
+#searches for story by title
+@app.route('/search', methods=['GET', 'POST'])
+@login_required
+def search():
+    storyThreads = []
+    query = None
+    if 'query' in request.form.keys() and len(request.form['query']) > 0:
+
+        # read the data from the form
+        # we can use [] now since we know the key exists
+
+        #adds story to storyThreads if the search query is contained in the title
+        query = request.form['query']
+        for s in Story.get_all_stories():
+            if query.lower() in s.title.lower():
+                storyThreads.append(s)
+    else:
+        flash('Missing search query', 'red')
+    return render_template('search.html', title='Search', threads=storyThreads, search=query)
 
 
 # user profile
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', title='Profile')
+    return render_template('profile.html', title='My Profile')
+
+# other user profiles
+@app.route('/profile/<username>')
+@login_required
+def userprofile(username):
+    if username == current_user().username:
+        return redirect("/profile")
+    return render_template('userprofile.html', title=f"{username}'s Profile", to_render=User.get_by_username(username))
 
 
 # logout user
@@ -140,16 +170,38 @@ def logout():
 @app.route('/stories')
 @login_required
 def stories():
-    storyThreads = [Story(1), Story(2), Story(3)]
-    return render_template('stories.html', title='Stories', threads=storyThreads)
+    storyThreads = Story.get_all_stories()
+    return render_template('stories.html', title='Story Hub', threads=storyThreads)
 
 
 # this will be modified to display a story given an id
-@app.route("/stories/<id>")
+@app.route("/stories/<id>", methods=['GET', 'POST'])
 @login_required
 def show_story(id):
     story = Story(id)
-    return render_template('storythread.html', to_render=story)
+    has_added_to = current_user().id in story.added
+
+    if 'addition' in request.form.keys():
+        addition = request.form['addition']
+
+        # make sure that the form data is valid
+        valid = True
+
+        inrange = lambda a, b, c: b <= a <= c
+
+        if not inrange(len(addition), 10, 2500):
+            flash('Story addition should be between 10 and 2500 characters!', 'red')
+            valid = False
+        if not valid:
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
+        else:
+            StoryAddition.new_story_addition(current_user(), story, addition)
+            flash('Added successfully', 'green')
+            return redirect(f'/stories/{id}')
+
+    show = "show" in request.form.keys()
+
+    return render_template('storythread.html', to_render=story, has_added_to = has_added_to, show_authors=show)
 
 #displays a form to create a new story
 @app.route('/stories/create/new', methods=['GET', 'POST'])
@@ -171,16 +223,15 @@ def new_story():
             flash('Title should be between 3 and 50 characters!', 'red')
             valid = False
 
-        if not (len(content), 10, 2500):
+        if not inrange(len(content), 10, 2500):
             flash('Story should be between 10 and 2500 characters!', 'red')
             valid = False
         if not valid:
-            flash('Please fix the above errors before submitting the form again!', 'red')
+            flash('Please fix the above error(s) before submitting the form again!', 'red')
         else:
             newstory_id = Story.new_story(current_user(), title, content)
             s = Story(newstory_id)
 
-            StoryAddition.new_story_addition(current_user(),s,content)
             flash('Story created successfully', 'green')
             #print(newstory_id)
             return redirect(f'/stories/{newstory_id}')

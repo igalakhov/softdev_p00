@@ -1,4 +1,7 @@
 from app.database import execute_command
+from app.database.user import User
+import datetime
+
 
 class StoryAddition:
 
@@ -11,12 +14,14 @@ class StoryAddition:
         self.time_created = data[0][1]
         self.content = data[0][2]
         self.story_id = data[0][3]
-        self.author_id = data[0][4]
+        self.author = User(data[0][4])
 
     # static methods
 
     # creates a new story addition
     @staticmethod
     def new_story_addition(user, story, content):
-        execute_command('INSERT INTO `story_addition` (content, story_id, author_id)'
-                        'VALUES (\"%s\", \"%s\", \"%s\")' % (content, story.id, user.id))
+        execute_command('INSERT INTO `story_addition` (content, story_id, author_id, time_created)'
+                        'VALUES (\"%s\", \"%s\", \"%s\", \"%s\")' % (content, story.id, user.id, datetime.datetime.now()))
+
+

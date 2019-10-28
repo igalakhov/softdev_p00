@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+{% from "_macros.html" import do_flashes %}
+
+
+{% block content %}
+
+    <div align="right">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('stories') }}">Story Hub</a>
+        <a href="{{ url_for('profile') }}">My Profile</a><br>
+        <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+
+    <h1 align="center">{{ to_render.username }}</h1>
+
+    {{ do_flashes() }}
+
+    Account created {{ to_render.time_created }}
+    <h3>Stories Started</h3>
+    {% if to_render.get_stories() is none %}
+        <p>{{ to_render.username }} hasn't started any stories :(</p>
+    {% else %}
+        <ul>
+        {%  for story in to_render.get_stories() %}
+            <li>
+                <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
+            </li>
+        {%  endfor %}
+        </ul>
+    {% endif %}
+
+
+    <h3>Stories Contributed To</h3>
+    {% if to_render.get_story_edits() is none %}
+        <p>{{ to_render.username }} hasn't contributed to any stories :(</p>
+    {% else %}
+        <ul>
+            {%  for story in to_render.get_story_edits() %}
+                <li>
+                    <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
+                </li>
+            {%  endfor %}
+        </ul>
+    {% endif %}
+{% endblock content %}

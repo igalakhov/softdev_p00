@@ -5,41 +5,47 @@
 {% block content %}
 
     <div align="right">
-        <a href="{{ url_for('logout') }}">Log Out</a><br>
-        <a href="users/{{ current_user.username }}">My Profile</a>
+        <a href="{{ url_for('index') }}">Home</a><br>
+        <a href="{{ url_for('logout') }}">Log Out</a>
     </div>
 
     <h1 align="center">Welcome, {{ current_user.username }}!</h1>
 
-    {{ do_flashes() }}
 
+    {{ do_flashes() }}
+    Account created {{ current_user.time_created }}
     <h3>Stories Started</h3>
     {% if current_user.get_stories() is none %}
+        {% set word = 'one' %}
         <p>You haven't started any stories :(</p>
     {% else %}
+        {% set word = 'another' %}
         <ul>
         {%  for story in current_user.get_stories() %}
             <li>
-                <a href="{{ url_for('show_story', id=story) }}">story</a>
+                <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
             </li>
         {%  endfor %}
         </ul>
     {% endif %}
-    <p>Start one <a href="{{ url_for('new_story') }}">here</a>.</p>
+    <p>Start {{ word }} <a href="{{ url_for('new_story') }}">here</a>.</p>
 
 
     <h3>Stories Contributed To</h3>
     {% if current_user.get_story_edits() is none %}
+        {% set word = 'one' %}
         <p>You haven't contributed to any stories :(</p>
-        <p>Find one <a href="{{ url_for('stories') }}">here</a>.</p>
     {% else %}
+        {% set word = 'more' %}
         <ul>
             {%  for story in current_user.get_story_edits() %}
                 <li>
-                    <a href="{{ url_for('show_story', id=story) }}">story</a>
+                    <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }}</a>
                 </li>
             {%  endfor %}
         </ul>
     {% endif %}
+    <p>Find {{ word }} <a href="{{ url_for('stories') }}">here</a>.</p>
 
 {% endblock content %}
+

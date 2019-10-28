@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% from "_macros.html" import do_flashes %}
+
+{% block content %}
+
+    <div align="right">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('profile') }}">My Profile</a><br>
+        <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+    <h1>Stories</h1>
+    <a href="{{ url_for('stories') }}">Story Hub</a>
+    <form method="post">
+        <input type="text" name="query">
+        <input type="submit" name="button" value="Search">
+    </form>
+    {{ do_flashes() }}
+    <p>Start a new story <a href="{{ url_for('new_story') }}">here</a>.</p>
+    {% if search %}
+        {{threads|length}} results found for '{{ search }}':<br><br>
+        {% if threads|length > 0 %}
+            {% for story in threads %}
+                <a href="{{ url_for('show_story', id=story.id) }}">{{ story.title }} by {{ story.author.username }}</a><br>
+            {%  endfor %}
+        {% else %}
+            No results found :(
+        {% endif %}
+    {% endif %}
+
+{% endblock content %}

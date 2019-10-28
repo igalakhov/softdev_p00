@@ -34,10 +34,16 @@ shawJ -- 2019-10-21 10:00
     Started building story and story_addition classes
     Created pages for viewing all stories and each individual story thread
     Edited design doc for clarity
+shawJ -- 2019-10-22 8:40
+    Worked on class structure and tested initialization
 galakhovI -- 2019-10-22 21:23
     Finished session management utilities
 galakhovI -- 2019-10-22 21:40
     More work on database objects
+shawJ -- 2019-10-22 22:00
+    Improved site skeleton
+    Worked on html forms and creating new stories
+    Added display for story threads
 lamE -- 2019-10-22 23:50
     Improved home page
     Added skeleton for searching
@@ -54,7 +60,31 @@ lamE -- 2019-10-24 8:10
 galakhovI -- 2019-10-24 8:40
     More database work
     Finished story object creation
+shawJ -- 2019-10-24 8:40
+    Worked on user profiles
 linM -- 2019-10-24 18:53
     Finished story_addition object
     Put a link on each page that takes you back to /home
-    Storied started now show on homepage
+    Stories started now show on homepage
+linM -- 2019-10-25 21:21
+    Users can now add to existing stories
+    Users can now only see the whole story if they've contributed before
+shawJ -- 2019-10-26 8:40
+    Improved user profiles
+    Added authors to story thread display
+lamE -- 2019-10-26 1:25
+    Sitewide appearance overhaul
+    Added navigation links
+    Added toggling of author names in a story thread
+galakhovI -- 2019-10-27 11:13
+    Added requirements.txt
+galakhovI -- 2019-10-27 11:55
+    Added instructions on how to run the project
+shawJ -- 2019-10-27 16:00
+    Added timestamps
+shawJ -- 2019-10-27 17:50
+    Updated design docs - updated site map to include search page
+shawJ -- 2019-10-27 19:04
+    Added search query
+linM -- 2019-10-27 20:06
+    Added in sample users and stories to database

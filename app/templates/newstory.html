@@ -5,7 +5,10 @@
 {% block content %}
 
     <div align="right">
-        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('stories') }}">Story Hub</a>
+        <a href="{{ url_for('profile') }}">My Profile</a><br>
+        <a href="{{ url_for('logout') }}">Log Out</a>
     </div>
 
     <h1>Create a New Story</h1>
@@ -21,7 +24,5 @@
 
         <input type="submit" value="Post Story">
     </form>
-
-    <p><a href="{{ url_for('home') }}">Home</a></p>
 
 {% endblock content %}
