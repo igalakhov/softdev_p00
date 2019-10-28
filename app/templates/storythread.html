@@ -4,13 +4,6 @@
 
 {% set title = to_render.title %}
 {% block content %}
-<<<<<<< HEAD
-    <h1>{{ to_render.title }} by {{ to_render.author.username }}</h1><br>
-    {{ to_render.first_addition }}
-
-    <p><a href="{{ url_for('home') }}">Home</a></p>
-{% endblock content %}
-=======
 
     <div align="right">
         <a href="{{ url_for('index') }}">Home</a>
@@ -53,5 +46,3 @@
     {% endif %}
 
 {% endblock content %}
-
->>>>>>> 9c952bf9c15f7dd7ae7dec386b091fff49e28c8a
