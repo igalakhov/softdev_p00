@@ -1,4 +1,4 @@
-# [project name] by team [thats important]
+# Collaborative Storytelling by thats important
 
 ## Roster:
 - Justin - Project Manager
