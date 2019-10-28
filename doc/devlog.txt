@@ -86,3 +86,5 @@ shawJ -- 2019-10-27 17:50
     Updated design docs
 shawJ -- 2019-10-27 19:04
     Added search query
+linM -- 2019-10-27 20:06
+    Added in sample users and stories
